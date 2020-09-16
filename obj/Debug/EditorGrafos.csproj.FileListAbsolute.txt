@@ -1,0 +1,11 @@
+C:\Users\Eduardo\source\repos\EditorGrafos\EditorGrafos\bin\Debug\EditorGrafos.exe.config
+C:\Users\Eduardo\source\repos\EditorGrafos\EditorGrafos\bin\Debug\EditorGrafos.exe
+C:\Users\Eduardo\source\repos\EditorGrafos\EditorGrafos\bin\Debug\EditorGrafos.pdb
+C:\Users\Eduardo\source\repos\EditorGrafos\EditorGrafos\obj\Debug\EditorGrafos.csprojAssemblyReference.cache
+C:\Users\Eduardo\source\repos\EditorGrafos\EditorGrafos\obj\Debug\EditorGrafos.Properties.Resources.resources
+C:\Users\Eduardo\source\repos\EditorGrafos\EditorGrafos\obj\Debug\EditorGrafos.csproj.GenerateResource.cache
+C:\Users\Eduardo\source\repos\EditorGrafos\EditorGrafos\obj\Debug\EditorGrafos.csproj.CoreCompileInputs.cache
+C:\Users\Eduardo\source\repos\EditorGrafos\EditorGrafos\obj\Debug\EditorGrafos.exe
+C:\Users\Eduardo\source\repos\EditorGrafos\EditorGrafos\obj\Debug\EditorGrafos.pdb
+C:\Users\Eduardo\source\repos\EditorGrafos\EditorGrafos\obj\Debug\EditorGrafos.Editor.resources
+C:\Users\Eduardo\source\repos\EditorGrafos\EditorGrafos\obj\Debug\EditorGrafos.GrafoInfo.resources
