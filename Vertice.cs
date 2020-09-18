@@ -36,5 +36,48 @@ namespace EditorGrafos
             g.DrawEllipse(p, rec);
             g.DrawString(indice_vertice.ToString(), new Font("Arial", 10), Brushes.Black, this.x-6, this.y-6);
         }
+
+        public int calculaGrado(List<Arista> list_arista)
+        {
+            int grado = 0;
+            foreach (var item in list_arista)
+            {
+                if (item.origen == this)
+                {
+                    grado++;
+                }
+                else if(item.destino == this)
+                {
+                    grado++;
+                }
+            }
+            return grado;
+        }
+
+        public int calculaGradoSalida(List<Arista> list_arista)
+        {
+            int grado = 0;
+            foreach (var item in list_arista)
+            {
+                if (item.origen == this)
+                {
+                    grado++;
+                }
+            }
+            return grado;
+        }
+
+        public int calculaGradoEntrada(List<Arista> list_arista)
+        {
+            int grado = 0;
+            foreach (var item in list_arista)
+            {
+                if (item.destino == this)
+                {
+                    grado++;
+                }
+            }
+            return grado;
+        }
     }
 }

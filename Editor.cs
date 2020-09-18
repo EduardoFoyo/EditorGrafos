@@ -12,7 +12,10 @@ namespace EditorGrafos
 {
     public partial class Editor : Form
     {
+        //Lista de Grafos en pantalla
         List<Grafo> list_grafo;
+
+        //Banderas de Seleccion de Botones
         Boolean bandera_agrega_vertice;
         Boolean bandera_agrega_grafo;
         Boolean bandera_agrega_arista;
@@ -21,11 +24,14 @@ namespace EditorGrafos
         Boolean bandera_moviendo_vartice;
         Boolean bandera_mover_grafo;
         Boolean bandera_moviendo_grafo;
+
+        //Objetos Auxiliares
         Vertice auxv1 = new Vertice(0, 0);
         Vertice auxv2 = new Vertice(0, 0);
         Vertice aux_mover_nodo = new Vertice(0, 0);
         Vertice nuevo_nodo;
 
+        //Cordenadas para Dibujar grafo
         int coordenada_mover_grafo_x;
         int coordenada_mover_grafo_y;
         int id_grafo_en_movimiento;
@@ -44,6 +50,7 @@ namespace EditorGrafos
             bandera_moviendo_grafo = false;
         }
 
+        //Dibujar Grafo
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             foreach (Grafo item in list_grafo)
@@ -60,12 +67,14 @@ namespace EditorGrafos
         {
             if (e.Button == MouseButtons.Left)
             {
+                //Agregar Grafo
                 if (bandera_agrega_grafo == true)
                 {
                     Grafo g = new Grafo(e.X, e.Y, list_grafo.Count);
                     list_grafo.Add(g);
                     bandera_agrega_grafo = false;
                 }
+                //Agregar Vertice
                 if (bandera_agrega_vertice == true)
                 {
                     nuevo_nodo = new Vertice(e.X, e.Y);
@@ -99,7 +108,7 @@ namespace EditorGrafos
                     }
                     
 
-                    Arista nueva_arista = new Arista(this.auxv1, this.auxv2, list_grafo);
+                    Arista nueva_arista = new Arista(this.auxv1, this.auxv2,list_grafo);
 
                     foreach (Grafo item in list_grafo)
                     {
@@ -117,6 +126,7 @@ namespace EditorGrafos
                                 auxv2.indice_vertice = item.list_vertice.Count();
                                 item.list_vertice.Add(this.auxv2);
                             }
+                            nueva_arista.indice_arista = item.list_arista.Count();
                             nueva_arista.indice_grafo = item.indice_grafo;
                             item.list_arista.Add(nueva_arista);
                             break;
@@ -124,6 +134,7 @@ namespace EditorGrafos
                     }
                 }
 
+                //Primer Click para agregar arista
                 if (bandera_agrega_arista == true && bandera_agrega_arista_segundo == false)
                 {
                     double dist = 0;
@@ -175,6 +186,7 @@ namespace EditorGrafos
             this.bandera_mover_grafo = !this.bandera_mover_grafo ;
         }
 
+        //Enlace entre vertices
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             if (bandera_mover_vertices != false)
@@ -211,6 +223,7 @@ namespace EditorGrafos
             }
         }
 
+        //Mover grafo
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if (bandera_mover_vertices != false && bandera_moviendo_vartice != false)
@@ -247,6 +260,7 @@ namespace EditorGrafos
             bandera_moviendo_grafo = false;
         }
 
+        //Abrir datos de los nodos y grafos
         private void pictureBox1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -257,8 +271,11 @@ namespace EditorGrafos
                     aux = item.buscaNodo(e.X, e.Y);
                     if (aux != null)
                     {
+                        int grado = aux.calculaGrado(item.list_arista);
+                        int grado_entrada = aux.calculaGradoEntrada(item.list_arista);
+                        int grado_salida = aux.calculaGradoSalida(item.list_arista);
                         Grafo gi_aux = list_grafo[aux.indice_grafo];
-                        GrafoInfo gi = new GrafoInfo(gi_aux);
+                        GrafoInfo gi = new GrafoInfo(gi_aux,item.indice_grafo , grado, grado_entrada, grado_salida);
                         gi.Show();
                         pictureBox1.Invalidate();
                         break;

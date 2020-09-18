@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing.Drawing2D;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace EditorGrafos
 {
@@ -13,17 +14,19 @@ namespace EditorGrafos
         public Vertice origen;
         public Vertice destino;
         public int indice_grafo;
+        public int indice_arista;
         public int peso;
         public List<Grafo> list_grafo;
         GraphicsPath gpLin;
         Pen lin, linSola;
 
-        public Arista(Vertice v1, Vertice v2,List<Grafo> list_grafo, int index = -1)
+        public Arista(Vertice v1, Vertice v2,List<Grafo> list_grafo, int indice_arista = -1, int index = -1)
         {
             this.list_grafo = list_grafo;
             origen = v1;
             destino = v2;
             this.indice_grafo = index;
+            this.indice_arista = indice_arista;
 
             lin = new Pen(Brushes.DimGray, 3); // linea para nodos dirigidos
             linSola = new Pen(Brushes.DimGray, 3); //linea para nodos no dirigidos
@@ -49,14 +52,38 @@ namespace EditorGrafos
 
             Point pfin = new Point(destino.x + a, destino.y - b);
             Point pin = new Point(origen.x - a, origen.y + b);
+
             if (list_grafo[origen.indice_grafo].dirigido == true)
             {
-                g.DrawLine(lin, pin, pfin);
+                if (origen.indice_vertice == destino.indice_vertice)
+                {
+                    g.DrawArc(lin, origen.x - 26, origen.y - 26, 26, 26, 45, 310);
+                }
+                else
+                {
+                    g.DrawLine(lin, pin, pfin);
+                }
             }
             else
             {
-                g.DrawLine(linSola, pin, pfin);
+                if (origen.indice_vertice == destino.indice_vertice)
+                {
+                    g.DrawArc(linSola, origen.x - 26, origen.y - 26, 26, 26, 45, 310);
+
+                }
+                else
+                {
+                    g.DrawLine(linSola, pin, pfin);
+                }
             }
+            
+            string drawString = indice_arista.ToString();
+            Font drawFont = new Font("Arial", 16);
+            SolidBrush drawBrush = new SolidBrush(Color.Black);
+            float x = (origen.x + destino.x) / 2 - 20;
+            float y = (origen.y + destino.y) / 2 - 20;
+            StringFormat drawFormat = new StringFormat();
+            g.DrawString(drawString, drawFont, drawBrush, x, y, drawFormat);
         }
     }
 }
