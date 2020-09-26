@@ -14,40 +14,29 @@ namespace EditorGrafos
     {
         public Grafo grafo;
         public int indice_grafo;
-        public int grado;
-        public int grado_entrada;
-        public int grado_salida;
 
-        public GrafoInfo(Grafo g,int indice_grafo, int grado, int grado_entrada, int grado_salida_nodo)
+        public GrafoInfo(Grafo g,int indice_grafo)
         {
             InitializeComponent();
+            this.grafo = g;
             this.indice_grafo = indice_grafo;
-            this.grado = grado;
-            indice_grafo_label.Text = "Indice de Grafo: " + indice_grafo.ToString();
-            grado_nodo.Text = "Grado del Nodo: "+grado.ToString();
-            this.grado_entrada = grado_entrada;
-            this.grado_salida = grado_salida_nodo;
 
             if (g.dirigido == true)
             {
                 dirigido.Hide();
-                grado_nodo.Text = "Grado de Entrada del Nodo: " + grado_entrada.ToString();
-                label_grado_salida.Text = "Grado de Salida del Nodo: " + grado_salida_nodo.ToString();
             }
-            this.grafo = g;
         }
 
         private void dirigido_CheckedChanged(object sender, EventArgs e)
         {
             grafo.dirigido = true;
             dirigido.Hide();
-            grado_nodo.Text = "Grado de Entrada del Nodo: " + this.grado_entrada.ToString();
-            label_grado_salida.Text = "Grado de Salida del Nodo: " + this.grado_salida.ToString();
         }
 
         private void mat_adyacencia_Click(object sender, EventArgs e)
         {
-            string mat_adyacencia = "";
+            data_matriz.Columns.Clear();
+            data_matriz.Rows.Clear();
 
             int[,] array = new int[grafo.list_vertice.Count() + 1, grafo.list_vertice.Count() + 1];
 
@@ -65,16 +54,25 @@ namespace EditorGrafos
                 array[aris.destino.indice_vertice, aris.origen.indice_vertice] = 1;
             }
 
-            for (int i = 0; i < grafo.list_vertice.Count(); i++)
+            data_matriz.Columns.Add("Index", "");
+
+            for (int i = 0; i < array.GetLength(1)-1; i++)
             {
-                for (int j = 0; j < grafo.list_vertice.Count(); j++)
-                {
-                    mat_adyacencia += " "+array[i, j].ToString()+" ";
-                }
-                mat_adyacencia += "\n";
+                data_matriz.Columns.Add("Value", i.ToString());
             }
 
-            MessageBox.Show(mat_adyacencia);
+            for (int i = 0; i < grafo.list_vertice.Count(); i++)
+            {
+                DataGridViewRow row = new DataGridViewRow();
+                row.CreateCells(data_matriz);
+                for (int j = 0; j < grafo.list_vertice.Count(); j++)
+                {
+                    if (j==0)
+                        row.Cells[j].Value = i.ToString();
+                    row.Cells[j+1].Value = array[i, j].ToString();
+                }
+                data_matriz.Rows.Add(row);
+            }
         }
 
         private void list_adyacencia_Click(object sender, EventArgs e)
@@ -96,7 +94,8 @@ namespace EditorGrafos
 
         private void matriz_incidencia_Click(object sender, EventArgs e)
         {
-            string matriz_incidencia = "";
+            data_matriz.Columns.Clear();
+            data_matriz.Rows.Clear();
 
             int[,] array = new int[grafo.list_vertice.Count() + 1, grafo.list_arista.Count() + 1];
 
@@ -123,17 +122,51 @@ namespace EditorGrafos
                 }
             }
 
-            for (int i = 0; i < grafo.list_vertice.Count(); i++)
+            data_matriz.Columns.Add("Index", "");
+
+            for (int i = 0; i < grafo.list_arista.Count(); i++)
             {
-                for (int j = 0; j < grafo.list_arista.Count(); j++)
-                {
-                    matriz_incidencia += " " + array[i, j].ToString() + " ";
-                }
-                matriz_incidencia += "\n";
+                data_matriz.Columns.Add("Value", i.ToString());
             }
 
-            MessageBox.Show(matriz_incidencia);
+            for (int i = 0; i < grafo.list_vertice.Count(); i++)
+            {
+                DataGridViewRow row = new DataGridViewRow();
+                row.CreateCells(data_matriz);
+                for (int j = 0; j < grafo.list_arista.Count(); j++)
+                {
+                    if (j == 0)
+                        row.Cells[j].Value = i.ToString();
+                    row.Cells[j + 1].Value = array[i, j].ToString();
+                }
+                data_matriz.Rows.Add(row);
+            }
+        }
 
+        private void grados_list_Click(object sender, EventArgs e)
+        {
+            string grados_nodo = "";
+            foreach (Vertice item in this.grafo.list_vertice)
+            {
+                int grado = item.calculaGrado(grafo.list_arista);
+                grados_nodo += item.indice_vertice.ToString() + ".- " + grado.ToString() + "\n";
+            }
+            MessageBox.Show(grados_nodo);
+        }
+
+        private void list_grados_dirigidos_Click(object sender, EventArgs e)
+        {
+            if (grafo.dirigido)
+            {
+                string grados_nodo = "";
+                foreach (Vertice item in this.grafo.list_vertice)
+                {
+                    int grado_entrada = item.calculaGradoEntrada(grafo.list_arista);
+                    int grado_salida = item.calculaGradoSalida(grafo.list_arista);
+                    grados_nodo += item.indice_vertice.ToString() + ".- Grados de Entrada: " + grado_entrada.ToString() + " Grados de Salida: " + grado_salida.ToString() + "\n";
+                }
+                MessageBox.Show(grados_nodo);
+            }
         }
     }
 }

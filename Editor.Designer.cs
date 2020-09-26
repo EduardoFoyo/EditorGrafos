@@ -30,7 +30,6 @@
         {
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.agrega_grafo = new System.Windows.Forms.Button();
-            this.agrega_vertice = new System.Windows.Forms.Button();
             this.agrega_arista = new System.Windows.Forms.Button();
             this.mover_vertice = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -62,19 +61,9 @@
             this.agrega_grafo.UseVisualStyleBackColor = true;
             this.agrega_grafo.Click += new System.EventHandler(this.agrega_grafo_Click);
             // 
-            // agrega_vertice
-            // 
-            this.agrega_vertice.Location = new System.Drawing.Point(124, 12);
-            this.agrega_vertice.Name = "agrega_vertice";
-            this.agrega_vertice.Size = new System.Drawing.Size(101, 31);
-            this.agrega_vertice.TabIndex = 2;
-            this.agrega_vertice.Text = "Agrega Nodo";
-            this.agrega_vertice.UseVisualStyleBackColor = true;
-            this.agrega_vertice.Click += new System.EventHandler(this.agrega_vertice_Click);
-            // 
             // agrega_arista
             // 
-            this.agrega_arista.Location = new System.Drawing.Point(231, 12);
+            this.agrega_arista.Location = new System.Drawing.Point(134, 12);
             this.agrega_arista.Name = "agrega_arista";
             this.agrega_arista.Size = new System.Drawing.Size(108, 31);
             this.agrega_arista.TabIndex = 3;
@@ -112,7 +101,6 @@
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.mover_vertice);
             this.Controls.Add(this.agrega_arista);
-            this.Controls.Add(this.agrega_vertice);
             this.Controls.Add(this.agrega_grafo);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Editor";
@@ -127,7 +115,6 @@
 
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button agrega_grafo;
-        private System.Windows.Forms.Button agrega_vertice;
         private System.Windows.Forms.Button agrega_arista;
         private System.Windows.Forms.CheckBox mover_vertice;
         private System.Windows.Forms.CheckBox checkBox1;

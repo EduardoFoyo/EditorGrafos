@@ -74,12 +74,6 @@ namespace EditorGrafos
                     list_grafo.Add(g);
                     bandera_agrega_grafo = false;
                 }
-                //Agregar Vertice
-                if (bandera_agrega_vertice == true)
-                {
-                    nuevo_nodo = new Vertice(e.X, e.Y);
-                    bandera_agrega_vertice = false;
-                }
 
                 //Segundo Click a los grafos 
                 if (bandera_agrega_arista == true && bandera_agrega_arista_segundo == true)
@@ -106,30 +100,31 @@ namespace EditorGrafos
                             break;
                         }
                     }
-                    
-
-                    Arista nueva_arista = new Arista(this.auxv1, this.auxv2,list_grafo);
-
-                    foreach (Grafo item in list_grafo)
+                    Arista nueva_arista = null;
+                    if (this.auxv1.indice_grafo == this.auxv2.indice_grafo || this.auxv1.indice_grafo == -1 || this.auxv2.indice_grafo == -1)
                     {
-                        if (item.indice_grafo == auxv1.indice_grafo || item.indice_grafo == auxv2.indice_grafo)
-                        {                           
-                            if (-1 == auxv1.indice_grafo)
+                        nueva_arista = new Arista(this.auxv1, this.auxv2, list_grafo);
+                        foreach (Grafo item in list_grafo)
+                        {
+                            if (item.indice_grafo == auxv1.indice_grafo || item.indice_grafo == auxv2.indice_grafo)
                             {
-                                nueva_arista.origen.indice_grafo = auxv2.indice_grafo;
-                                auxv1.indice_vertice = item.list_vertice.Count();
-                                item.list_vertice.Add(this.auxv1);
+                                if (-1 == auxv1.indice_grafo)
+                                {
+                                    nueva_arista.origen.indice_grafo = auxv2.indice_grafo;
+                                    auxv1.indice_vertice = item.list_vertice.Count();
+                                    item.list_vertice.Add(this.auxv1);
+                                }
+                                else if (-1 == auxv2.indice_grafo)
+                                {
+                                    nueva_arista.destino.indice_grafo = auxv1.indice_grafo;
+                                    auxv2.indice_vertice = item.list_vertice.Count();
+                                    item.list_vertice.Add(this.auxv2);
+                                }
+                                nueva_arista.indice_arista = item.list_arista.Count();
+                                nueva_arista.indice_grafo = item.indice_grafo;
+                                item.list_arista.Add(nueva_arista);
+                                break;
                             }
-                            else if(-1 == auxv2.indice_grafo)
-                            {
-                                nueva_arista.destino.indice_grafo = auxv1.indice_grafo;
-                                auxv2.indice_vertice = item.list_vertice.Count();
-                                item.list_vertice.Add(this.auxv2);
-                            }
-                            nueva_arista.indice_arista = item.list_arista.Count();
-                            nueva_arista.indice_grafo = item.indice_grafo;
-                            item.list_arista.Add(nueva_arista);
-                            break;
                         }
                     }
                 }
@@ -164,11 +159,6 @@ namespace EditorGrafos
         private void agrega_grafo_Click(object sender, EventArgs e)
         {
             bandera_agrega_grafo = !bandera_agrega_grafo;
-        }
-
-        private void agrega_vertice_Click(object sender, EventArgs e)
-        {
-            bandera_agrega_vertice = !bandera_agrega_vertice;
         }
 
         private void agrega_arista_Click(object sender, EventArgs e)
@@ -266,21 +256,24 @@ namespace EditorGrafos
             if (e.Button == MouseButtons.Left)
             {
                 Vertice aux;
+                int nuevo_nodo_int = 0;
                 foreach (Grafo item in list_grafo)
                 {
                     aux = item.buscaNodo(e.X, e.Y);
                     if (aux != null)
                     {
-                        int grado = aux.calculaGrado(item.list_arista);
-                        int grado_entrada = aux.calculaGradoEntrada(item.list_arista);
-                        int grado_salida = aux.calculaGradoSalida(item.list_arista);
+                        nuevo_nodo_int++;
                         Grafo gi_aux = list_grafo[aux.indice_grafo];
-                        GrafoInfo gi = new GrafoInfo(gi_aux,item.indice_grafo , grado, grado_entrada, grado_salida);
+                        GrafoInfo gi = new GrafoInfo(gi_aux,item.indice_grafo);
                         gi.Show();
                         pictureBox1.Invalidate();
                         break;
                     }
                 }
+                if (nuevo_nodo_int == 0)
+                    nuevo_nodo = new Vertice(e.X, e.Y);
+                pictureBox1.Invalidate();
+
             }
         }
     }
