@@ -8,6 +8,7 @@ using System.Drawing;
 
 namespace EditorGrafos
 {
+    [Serializable]
     public class Vertice
     {
         public int indice_grafo;

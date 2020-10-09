@@ -9,16 +9,18 @@ using System.Windows.Forms;
 
 namespace EditorGrafos
 {
+    [Serializable]
     public class Arista
     {
-        public Vertice origen;
-        public Vertice destino;
+        public Vertice origen;   //Vertice U
+        public Vertice destino;  //Vertice V
+
         public int indice_grafo;
         public int indice_arista;
-        public int peso;
+
         public List<Grafo> list_grafo;
-        GraphicsPath gpLin;
-        Pen lin, linSola;
+        
+        
 
         public Arista(Vertice v1, Vertice v2,List<Grafo> list_grafo, int indice_arista = -1, int index = -1)
         {
@@ -27,17 +29,21 @@ namespace EditorGrafos
             destino = v2;
             this.indice_grafo = index;
             this.indice_arista = indice_arista;
-
-            lin = new Pen(Brushes.DimGray, 3); // linea para nodos dirigidos
-            linSola = new Pen(Brushes.DimGray, 3); //linea para nodos no dirigidos
-            gpLin = new GraphicsPath();
-            gpLin.AddLine(new Point(0, 0), new Point(3, -3));
-            gpLin.AddLine(new Point(0, 0), new Point(-3, -3));
-            lin.CustomEndCap = new CustomLineCap(null, gpLin);
         }
 
         public void dibujaArista(Graphics g)
         {
+            GraphicsPath gpLin;
+            Pen lin, linSola;
+
+            lin = new Pen(Brushes.DimGray, 3); // linea para nodos dirigidos
+            linSola = new Pen(Brushes.DimGray, 3); //linea para nodos no dirigidos
+
+            gpLin = new GraphicsPath();
+            gpLin.AddLine(new Point(0, 0), new Point(3, -3));
+            gpLin.AddLine(new Point(0, 0), new Point(-3, -3));
+            lin.CustomEndCap = new CustomLineCap(null, gpLin);
+
             double tg = (double)(origen.y - destino.y) / (destino.x - origen.x);
             double atg = Math.Atan(tg);
 
@@ -53,7 +59,7 @@ namespace EditorGrafos
             Point pfin = new Point(destino.x + a, destino.y - b);
             Point pin = new Point(origen.x - a, origen.y + b);
 
-            if (list_grafo[origen.indice_grafo].dirigido == true)
+            if (list_grafo[origen.indice_grafo].dirigido == true) //Verifica si grafo es dirigido o no dirigido 
             {
                 if (origen.indice_vertice == destino.indice_vertice)
                 {
@@ -77,6 +83,7 @@ namespace EditorGrafos
                 }
             }
             
+            //Muestra indice de la arista a la mitad de la misma
             string drawString = indice_arista.ToString();
             Font drawFont = new Font("Arial", 16);
             SolidBrush drawBrush = new SolidBrush(Color.Black);

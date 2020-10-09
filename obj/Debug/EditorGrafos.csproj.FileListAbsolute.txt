@@ -9,3 +9,4 @@ C:\Users\Eduardo\source\repos\EditorGrafos\EditorGrafos\obj\Debug\EditorGrafos.e
 C:\Users\Eduardo\source\repos\EditorGrafos\EditorGrafos\obj\Debug\EditorGrafos.pdb
 C:\Users\Eduardo\source\repos\EditorGrafos\EditorGrafos\obj\Debug\EditorGrafos.Editor.resources
 C:\Users\Eduardo\source\repos\EditorGrafos\EditorGrafos\obj\Debug\EditorGrafos.GrafoInfo.resources
+C:\Users\Eduardo\source\repos\EditorGrafos\EditorGrafos\obj\Debug\EditorGrafos.Isomorfismo.resources

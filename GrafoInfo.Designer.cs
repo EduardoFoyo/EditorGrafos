@@ -37,6 +37,11 @@
             this.data_matriz = new System.Windows.Forms.DataGridView();
             this.grados_list = new System.Windows.Forms.Button();
             this.list_grados_dirigidos = new System.Windows.Forms.Button();
+            this.select_indice_grafo = new System.Windows.Forms.ComboBox();
+            this.boton_isomorfismo = new System.Windows.Forms.Button();
+            this.guarda_grafo = new System.Windows.Forms.Button();
+            this.num_vertices = new System.Windows.Forms.Label();
+            this.num_aristas = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.data_matriz)).BeginInit();
             this.SuspendLayout();
             // 
@@ -92,10 +97,11 @@
             // indice_grafo_label
             // 
             this.indice_grafo_label.AutoSize = true;
-            this.indice_grafo_label.Location = new System.Drawing.Point(431, 18);
+            this.indice_grafo_label.Location = new System.Drawing.Point(148, 9);
             this.indice_grafo_label.Name = "indice_grafo_label";
-            this.indice_grafo_label.Size = new System.Drawing.Size(0, 17);
+            this.indice_grafo_label.Size = new System.Drawing.Size(16, 17);
             this.indice_grafo_label.TabIndex = 6;
+            this.indice_grafo_label.Text = "a";
             // 
             // data_matriz
             // 
@@ -108,9 +114,9 @@
             // 
             // grados_list
             // 
-            this.grados_list.Location = new System.Drawing.Point(457, 14);
+            this.grados_list.Location = new System.Drawing.Point(382, 50);
             this.grados_list.Name = "grados_list";
-            this.grados_list.Size = new System.Drawing.Size(153, 23);
+            this.grados_list.Size = new System.Drawing.Size(228, 24);
             this.grados_list.TabIndex = 8;
             this.grados_list.Text = "Lista de Grados";
             this.grados_list.UseVisualStyleBackColor = true;
@@ -118,19 +124,70 @@
             // 
             // list_grados_dirigidos
             // 
-            this.list_grados_dirigidos.Location = new System.Drawing.Point(457, 47);
+            this.list_grados_dirigidos.Location = new System.Drawing.Point(382, 80);
             this.list_grados_dirigidos.Name = "list_grados_dirigidos";
-            this.list_grados_dirigidos.Size = new System.Drawing.Size(153, 23);
+            this.list_grados_dirigidos.Size = new System.Drawing.Size(228, 23);
             this.list_grados_dirigidos.TabIndex = 9;
             this.list_grados_dirigidos.Text = "Lista de Grados Dirigidos";
             this.list_grados_dirigidos.UseVisualStyleBackColor = true;
             this.list_grados_dirigidos.Click += new System.EventHandler(this.list_grados_dirigidos_Click);
+            // 
+            // select_indice_grafo
+            // 
+            this.select_indice_grafo.FormattingEnabled = true;
+            this.select_indice_grafo.Location = new System.Drawing.Point(12, 51);
+            this.select_indice_grafo.Name = "select_indice_grafo";
+            this.select_indice_grafo.Size = new System.Drawing.Size(121, 24);
+            this.select_indice_grafo.TabIndex = 11;
+            // 
+            // boton_isomorfismo
+            // 
+            this.boton_isomorfismo.Location = new System.Drawing.Point(12, 81);
+            this.boton_isomorfismo.Name = "boton_isomorfismo";
+            this.boton_isomorfismo.Size = new System.Drawing.Size(121, 23);
+            this.boton_isomorfismo.TabIndex = 12;
+            this.boton_isomorfismo.Text = "Isomorfismo";
+            this.boton_isomorfismo.UseVisualStyleBackColor = true;
+            this.boton_isomorfismo.Click += new System.EventHandler(this.boton_isomorfismo_Click);
+            // 
+            // guarda_grafo
+            // 
+            this.guarda_grafo.Location = new System.Drawing.Point(148, 78);
+            this.guarda_grafo.Name = "guarda_grafo";
+            this.guarda_grafo.Size = new System.Drawing.Size(228, 23);
+            this.guarda_grafo.TabIndex = 13;
+            this.guarda_grafo.Text = "Guarda Grafo";
+            this.guarda_grafo.UseVisualStyleBackColor = true;
+            this.guarda_grafo.Click += new System.EventHandler(this.guarda_grafo_Click);
+            // 
+            // num_vertices
+            // 
+            this.num_vertices.AutoSize = true;
+            this.num_vertices.Location = new System.Drawing.Point(148, 33);
+            this.num_vertices.Name = "num_vertices";
+            this.num_vertices.Size = new System.Drawing.Size(16, 17);
+            this.num_vertices.TabIndex = 14;
+            this.num_vertices.Text = "a";
+            // 
+            // num_aristas
+            // 
+            this.num_aristas.AutoSize = true;
+            this.num_aristas.Location = new System.Drawing.Point(148, 54);
+            this.num_aristas.Name = "num_aristas";
+            this.num_aristas.Size = new System.Drawing.Size(16, 17);
+            this.num_aristas.TabIndex = 15;
+            this.num_aristas.Text = "a";
             // 
             // GrafoInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.num_aristas);
+            this.Controls.Add(this.num_vertices);
+            this.Controls.Add(this.guarda_grafo);
+            this.Controls.Add(this.boton_isomorfismo);
+            this.Controls.Add(this.select_indice_grafo);
             this.Controls.Add(this.list_grados_dirigidos);
             this.Controls.Add(this.grados_list);
             this.Controls.Add(this.data_matriz);
@@ -159,5 +216,10 @@
         private System.Windows.Forms.DataGridView data_matriz;
         private System.Windows.Forms.Button grados_list;
         private System.Windows.Forms.Button list_grados_dirigidos;
+        private System.Windows.Forms.ComboBox select_indice_grafo;
+        private System.Windows.Forms.Button boton_isomorfismo;
+        private System.Windows.Forms.Button guarda_grafo;
+        private System.Windows.Forms.Label num_vertices;
+        private System.Windows.Forms.Label num_aristas;
     }
 }

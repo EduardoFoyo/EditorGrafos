@@ -30,9 +30,10 @@
         {
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.agrega_grafo = new System.Windows.Forms.Button();
-            this.agrega_arista = new System.Windows.Forms.Button();
             this.mover_vertice = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.cargar_grafo = new System.Windows.Forms.Button();
+            this.grafo_coleccion = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,16 +62,6 @@
             this.agrega_grafo.UseVisualStyleBackColor = true;
             this.agrega_grafo.Click += new System.EventHandler(this.agrega_grafo_Click);
             // 
-            // agrega_arista
-            // 
-            this.agrega_arista.Location = new System.Drawing.Point(134, 12);
-            this.agrega_arista.Name = "agrega_arista";
-            this.agrega_arista.Size = new System.Drawing.Size(108, 31);
-            this.agrega_arista.TabIndex = 3;
-            this.agrega_arista.Text = "Agregar Arista";
-            this.agrega_arista.UseVisualStyleBackColor = true;
-            this.agrega_arista.Click += new System.EventHandler(this.agrega_arista_Click);
-            // 
             // mover_vertice
             // 
             this.mover_vertice.AutoSize = true;
@@ -93,14 +84,55 @@
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
+            // cargar_grafo
+            // 
+            this.cargar_grafo.Location = new System.Drawing.Point(274, 12);
+            this.cargar_grafo.Name = "cargar_grafo";
+            this.cargar_grafo.Size = new System.Drawing.Size(119, 31);
+            this.cargar_grafo.TabIndex = 7;
+            this.cargar_grafo.Text = "Cargar Grafo";
+            this.cargar_grafo.UseVisualStyleBackColor = true;
+            this.cargar_grafo.Click += new System.EventHandler(this.cargar_grafo_Click);
+            // 
+            // grafo_coleccion
+            // 
+            this.grafo_coleccion.FormattingEnabled = true;
+            this.grafo_coleccion.Items.AddRange(new object[] {
+            "grafo_2_regular",
+            "grafo_3_regular",
+            "grafo_4_regular",
+            "k1",
+            "k2",
+            "k3",
+            "k4",
+            "k5",
+            "k6",
+            "k7",
+            "c3",
+            "c4",
+            "c5",
+            "c6",
+            "c7",
+            "w3",
+            "w4",
+            "w5",
+            "w6",
+            "w7",
+            "Q3"});
+            this.grafo_coleccion.Location = new System.Drawing.Point(147, 16);
+            this.grafo_coleccion.Name = "grafo_coleccion";
+            this.grafo_coleccion.Size = new System.Drawing.Size(121, 24);
+            this.grafo_coleccion.TabIndex = 8;
+            // 
             // Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1340, 673);
+            this.Controls.Add(this.grafo_coleccion);
+            this.Controls.Add(this.cargar_grafo);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.mover_vertice);
-            this.Controls.Add(this.agrega_arista);
             this.Controls.Add(this.agrega_grafo);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Editor";
@@ -115,8 +147,9 @@
 
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button agrega_grafo;
-        private System.Windows.Forms.Button agrega_arista;
         private System.Windows.Forms.CheckBox mover_vertice;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button cargar_grafo;
+        private System.Windows.Forms.ComboBox grafo_coleccion;
     }
 }

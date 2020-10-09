@@ -8,18 +8,31 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
+
 namespace EditorGrafos
 {
     public partial class GrafoInfo : Form
     {
+        List<Grafo> list_grafo;
+
         public Grafo grafo;
         public int indice_grafo;
 
-        public GrafoInfo(Grafo g,int indice_grafo)
+        public GrafoInfo(Grafo g,int indice_grafo, List<Grafo> list_grafo)
         {
             InitializeComponent();
             this.grafo = g;
             this.indice_grafo = indice_grafo;
+            this.list_grafo = list_grafo;
+            indice_grafo_label.Text = "Indice de Grafo: " + indice_grafo.ToString();
+            num_vertices.Text = "Numero de Vertices: " + grafo.list_vertice.Count();
+            num_aristas.Text = "Numero de Aristas: " + grafo.list_arista.Count();
+            select_indice_grafo.DataSource = list_grafo;
+            select_indice_grafo.DisplayMember = "indice_grafo";
+
+
 
             if (g.dirigido == true)
             {
@@ -167,6 +180,25 @@ namespace EditorGrafos
                 }
                 MessageBox.Show(grados_nodo);
             }
+        }
+
+        //Abrir clase de isomorfismo donde muestra la informacion 
+        private void boton_isomorfismo_Click(object sender, EventArgs e)
+        {
+            Grafo g1 = this.grafo;
+            Grafo g2 = this.list_grafo[Int32.Parse(select_indice_grafo.Text)];
+            Isomorfismo i = new Isomorfismo(g1, g2);
+            i.Show();
+        }
+
+        //Boton de guardar archivos
+        private void guarda_grafo_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Por el momento este boton no guarda grafos");
+            /*BinaryFormatter formateador = new BinaryFormatter();
+            Stream miStream = new FileStream("", FileMode.Create,FileAccess.Write,FileShare.None);
+            formateador.Serialize(miStream, this.grafo);
+            miStream.Close();*/
         }
     }
 }
